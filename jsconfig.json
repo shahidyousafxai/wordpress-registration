@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@network/*": ["./src/network/*"],
+      "@validations": ["./src/validations/index.js"],
+      "@validations/*": ["./src/validations/*"],
+      "@store/*": ["./src/store/*"]
+    }
+  },
+  "include": ["src"]
+}

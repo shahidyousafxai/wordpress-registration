@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Outfit:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Antonio:wght@100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Bad+Script&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&family=Baskervville:ital,wght@0,300..700;1,300..700&display=swap');
+
+@import "tailwindcss";
+@import "./styles/theme.css";
+
+@font-face {
+  font-family: 'Mollie';
+  src: url('/fonts/Mollie-Glaston.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Baskervville';
+  src: url('/fonts/Baskervville-Regular.ttf') format('truetype');
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100%;
+  background-color: #ffffff;
+}
+
+@layer components {
+  .section-width {
+    @apply mx-auto max-w-[1296px];
+  }
+  
+  .center {
+    @apply flex items-center justify-between;
+  }
+}

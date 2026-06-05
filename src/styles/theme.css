@@ -1,0 +1,77 @@
+@theme {
+  /* Breakpoints */
+  --breakpoint-xxs: 320px;
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 575px;
+  --breakpoint-smd: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-base: 992px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1296px;
+  --breakpoint-xxl: 1440px;
+  --breakpoint-xxxl: 1536px;
+
+  /* Fonts */
+  --font-mollie: 'Mollie', sans-serif;
+  --font-nunito: 'Nunito', sans-serif;
+  --font-nunitosans: 'Nunito Sans', sans-serif;
+  --font-outfit: 'Outfit', sans-serif;
+  --font-raleway: 'Raleway', sans-serif;
+  --font-antonio: 'Antonio', sans-serif;
+  --font-baskervville: 'Baskervville', serif;
+  --font-roboto: 'Roboto', sans-serif;
+  --font-badScript: 'Bad Script', cursive;
+  --font-noto: 'Noto Serif', serif;
+  --font-notodisplay: 'Noto Serif Display', serif;
+
+  /* Primary */
+  --color-primary-main: #000000;
+  --color-primary-black: #000000;
+  --color-primary-white: #FFFFFF;
+
+  /* Secondary */
+  --color-secondary-main: #FFF2E9;
+  --color-secondary-helpscout: #FFEADF;
+  --color-secondary-gorgias: #FFF0DF;
+  --color-secondary-gorgias-light: #FFFBF0;
+  --color-secondary-gorgias-light2: #FFDFBA;
+  --color-secondary-peachDark: #FD9783;
+  --color-secondary-peach: #FFF0DF;
+  --color-secondary-darkMintGreen: #98BEAA;
+  --color-secondary-brightBrown: #752801;
+  --color-secondary-gorgiasAlt: #FFEADF;
+  --color-secondary-lightPeach: #FFFBEE;
+  --color-secondary-lightPeach-alt: #CBEEDC;
+  --color-secondary-lightMintGreen: #CBEEDC;
+  --color-secondary-lightBrown: #8B7263;
+  --color-secondary-rustyRed: #D02832;
+  --color-secondary-beige: #F1EAD6;
+  --color-secondary-rustyRedLight: rgba(208, 40, 50, 0.1);
+  --color-secondary-interactionFocus: #B5E0CA;
+  --color-secondary-lightAquamarine: #E4FEFD;
+
+  /* Neutral */
+  --color-neutral: #787878;
+  --color-neutral-dark1: #9F9F9F;
+  --color-neutral-dark2: #A6A6A6;
+  --color-neutral-dark3: #C2C2C2;
+  --color-neutral-dark4: #313131;
+  --color-neutral-dark5: #393F3A;
+  --color-neutral-dark6: #58625B;
+  --color-neutral-dark7: #323232;
+  --color-neutral-dark8: #7F7F7F;
+  --color-neutral-light1: #D9D9D9;
+  --color-neutral-light2: #DBDBDB;
+  --color-neutral-light3: #DCDCDC;
+  --color-neutral-light4: #EFEFEF;
+  --color-neutral-light5: #F3EFEF;
+  --color-neutral-light6: #E7E4E1;
+
+  /* Theme / Semantic */
+  --color-dark: #201F1F;
+  --color-natural: #F8F8EF;
+  --color-classic: #f7f5f0;
+  --color-error: #c62828;
+  --color-error-light: #ef5350;
+  --color-premium: #FBC5B5;
+}
