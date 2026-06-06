@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AuthHeading } from '@/components/Shared/Auth'
 import TextField from '@/components/Shared/TextField'
 import { creatorApplicationSchema } from '@/validations'
+import { ROUTE_PATHS } from '@/router/constants'
 import { cn } from '@/utils'
 import InstagramIcon from '@/assets/icons/InstagramIcon'
 
@@ -90,9 +92,9 @@ const CreatorApplicationForm = ({ defaultValues, onSubmit }) => {
 
         <p className="text-center font-raleway text-lg text-black">
           Already a user?{' '}
-          <button type="button" className="underline text-black font-semibold">
+          <Link to={ROUTE_PATHS.LOGIN} className="underline text-black font-semibold">
             Login
-          </button>
+          </Link>
         </p>
       </div>
     </form>

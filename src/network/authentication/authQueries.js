@@ -3,7 +3,23 @@ import { toast } from 'sonner'
 import { queryKeys } from '@/network/http'
 import { messageFromAxiosError } from '@/utils'
 import { useAuthStore } from '@/store/useAuthStore'
-import { registerFn } from './authFns'
+import { loginFn, registerFn } from './authFns'
+
+export function useLoginMutation() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: loginFn,
+    onSuccess: ({ user, token }) => {
+      useAuthStore.getState().setAuth(user, token)
+      void queryClient.invalidateQueries({ queryKey: queryKeys.auth.all })
+      toast.success('Welcome back!')
+    },
+    onError: (error) => {
+      toast.error(messageFromAxiosError(error, 'Login failed'))
+    },
+  })
+}
 
 export function useRegisterMutation() {
   const queryClient = useQueryClient()

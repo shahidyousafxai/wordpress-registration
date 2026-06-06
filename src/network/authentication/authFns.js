@@ -11,6 +11,7 @@ function mapAuthUser(apiUser) {
     isNewUser: apiUser?.isNewUser ?? apiUser?.is_new_user ?? false,
     isEmailVerified: apiUser?.isEmailVerified ?? apiUser?.is_email_verified ?? false,
     email: apiUser?.email ?? null,
+    firstName: apiUser?.firstName ?? apiUser?.first_name ?? null,
   }
 }
 
@@ -24,6 +25,25 @@ function normalizeAuthResponse(response) {
     null
 
   return { user, token }
+}
+
+async function stubLoginFn({ email }) {
+  await new Promise((resolve) => setTimeout(resolve, 400))
+
+  const name = email?.split('@')?.[0] ?? 'Creator'
+
+  return {
+    user: {
+      userId: 'demo-creator',
+      userRole: 'creator',
+      planType: 'free',
+      isNewUser: false,
+      isEmailVerified: true,
+      email,
+      firstName: name.charAt(0).toUpperCase() + name.slice(1),
+    },
+    token: 'stub-token',
+  }
 }
 
 async function stubRegisterFn({ email }) {
@@ -40,6 +60,14 @@ async function stubRegisterFn({ email }) {
     },
     token: 'stub-token',
   }
+}
+
+export function loginFn(payload) {
+  if (USE_AUTH_STUB) {
+    return stubLoginFn(payload)
+  }
+
+  return post(AUTH.LOGIN, payload).then(normalizeAuthResponse)
 }
 
 export function registerFn(payload) {
