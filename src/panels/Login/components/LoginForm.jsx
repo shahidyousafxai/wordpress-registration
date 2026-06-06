@@ -43,10 +43,10 @@ const LoginForm = ({ welcomeName, onSubmit, isSubmitting = false }) => {
             Login with Instagram
           </button>
 
-          <div className="center gap-2">
+          <div className="center">
             <span className="h-px w-10 bg-neutral-light3" />
             <span className="font-nunito text-base text-neutral whitespace-nowrap">
-              or continue with email
+              or enter Instagram username
             </span>
             <span className="h-px w-10 bg-neutral-light3" />
           </div>
@@ -54,13 +54,11 @@ const LoginForm = ({ welcomeName, onSubmit, isSubmitting = false }) => {
           <div className="flex flex-col gap-8">
             <TextField
               {...register('email')}
-              type="email"
-              autoComplete="email"
               placeholder="Email Address"
               hasError={!!errors.email}
               helperText={errors.email?.message}
               wrapperClassName="w-full"
-              className="rounded-sm border-neutral-light3 py-3 font-baskervville text-2xl placeholder:text-neutral placeholder:font-outfit"
+              className="rounded-sm border-neutral-light3 py-3 font-nunito placeholder:text-neutral-dark2"
             />
 
             <div className="flex flex-col gap-2 w-full">
@@ -87,9 +85,9 @@ const LoginForm = ({ welcomeName, onSubmit, isSubmitting = false }) => {
                     className="absolute right-0 text-neutral-dark1 cursor-pointer"
                   >
                     {showPassword ? (
-                      <VisibilityIcon width={20} height={20} />
+                      <VisibilityIcon width={20} height={20} className={'text-black'} />
                     ) : (
-                      <VisibilityOffIcon width={20} height={20} />
+                      <VisibilityOffIcon width={20} height={20} className={'text-black'} />
                     )}
                   </button>
                 </div>
