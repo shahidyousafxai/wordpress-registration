@@ -9,7 +9,7 @@ import { ROUTE_PATHS } from '@/router/constants'
 const Registration = () => {
   const navigate = useNavigate()
   const registerMutation = useRegisterMutation()
-  const [step, setStep] = useState(2)
+  const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
     firstName: '',
     instagramUsername: '',

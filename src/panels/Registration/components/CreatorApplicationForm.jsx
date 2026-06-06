@@ -22,7 +22,7 @@ const CreatorApplicationForm = ({ defaultValues, onSubmit }) => {
   })
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col py-10">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col py-10 px-4">
       <AuthHeading title="Creator Application" />
 
       <div className="mt-12 flex flex-col gap-5 items-center max-w-[365px] mx-auto w-full">
@@ -30,7 +30,7 @@ const CreatorApplicationForm = ({ defaultValues, onSubmit }) => {
         <div className='flex flex-col gap-14 w-full'>
           <button
             type="button"
-            className="flex w-full items-center justify-center gap-2 rounded border border-primary-black px-4 py-5.5 font-outfit text-base uppercase tracking-[3px] text-primary-black"
+            className="flex w-full items-center justify-center gap-2 rounded border border-primary-black px-4 py-3.5 smd:py-5.5 font-outfit text-sm smd:text-base uppercase tracking-[3px] text-primary-black"
           >
             <div className="pointer-events-none text-primary-black">
               <InstagramIcon width={18} height={18} className="rounded-full bg-primary-black p-1 text-primary-white size-6" />
@@ -83,7 +83,7 @@ const CreatorApplicationForm = ({ defaultValues, onSubmit }) => {
 
         <button
           type="submit"
-          className="w-full mt-17 rounded-sm bg-black py-5.5 font-outfit text-base uppercase tracking-[3px] text-white"
+          className="w-full mt-17 rounded-sm bg-black py-3.5 smd:py-5.5 font-outfit text-sm smd:text-base uppercase tracking-[3px] text-white"
         >
           Check Eligibility
         </button>

@@ -21,7 +21,7 @@ const EmailStepForm = ({ defaultValues, onSubmit }) => {
   })
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col justify-between py-10">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col justify-between py-10 max-base:h-[80dvh] px-4">
       <AuthHeading
         title="Where would you like collabs sent?"
         subtitle="(We only send important info)"
@@ -68,7 +68,6 @@ const EmailStepForm = ({ defaultValues, onSubmit }) => {
             {' '}&amp; to receive emails &amp; texts relevant to ILOLA™.
           </span>
         </label>
-
       </div>
     </form>
   )
