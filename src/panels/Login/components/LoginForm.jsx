@@ -11,6 +11,9 @@ import { loginSchema } from '@/validations'
 import { ROUTE_PATHS } from '@/router/constants'
 import { cn } from '@/utils'
 
+const AUTH_INPUT_HEIGHT =
+  'h-[52px] min-h-[52px] box-border text-lg font-nunito leading-none'
+
 const LoginForm = ({ welcomeName, onSubmit, isSubmitting = false }) => {
   const [showPassword, setShowPassword] = useState(false)
 
@@ -58,25 +61,38 @@ const LoginForm = ({ welcomeName, onSubmit, isSubmitting = false }) => {
               hasError={!!errors.email}
               helperText={errors.email?.message}
               wrapperClassName="w-full"
-              className="rounded-sm border-neutral-light3 py-3 font-nunito placeholder:text-neutral-dark2"
+              className={cn(
+                AUTH_INPUT_HEIGHT,
+                'rounded-none border-neutral-light3 px-3 py-0 placeholder:text-neutral-dark2'
+              )}
             />
 
             <div className="flex flex-col gap-2 w-full">
               <fieldset
                 className={cn(
-                  'relative rounded-none border px-3 pt-0 pb-1',
-                  errors.password ? 'border-error' : 'border-neutral-light3'
+                  'group relative rounded-none border px-3 transition-colors',
+                  AUTH_INPUT_HEIGHT,
+                  errors.password
+                    ? 'border-error focus-within:border-error'
+                    : 'border-neutral-light3 focus-within:border-black'
                 )}
               >
-                <legend className="px-1 font-outfit text-sm text-neutral-dark1">
+                <legend
+                  className={cn(
+                    'absolute -top-2.5 left-3 bg-primary-white px-1 font-outfit text-sm leading-none transition-colors',
+                    errors.password
+                      ? 'text-error'
+                      : 'text-neutral-dark1 group-focus-within:text-black'
+                  )}
+                >
                   Password
                 </legend>
-                <div className="relative flex items-center">
+                <div className="relative flex h-full items-center">
                   <input
                     {...register('password')}
                     type={showPassword ? 'text' : 'password'}
                     autoComplete="current-password"
-                    className="w-full border-0 bg-transparent py-2 pr-10 text-2xl font-baskervville outline-none"
+                    className="h-full w-full border-0 bg-transparent pr-10 text-lg font-nunito leading-none outline-none"
                   />
                   <button
                     type="button"
