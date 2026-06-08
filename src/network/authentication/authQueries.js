@@ -29,6 +29,7 @@ export function useRegisterMutation() {
     onSuccess: ({ user, token, mediaKit }) => {
       useAuthStore.getState().setAuth(user, token)
       useAuthStore.getState().setMediaKit(mediaKit)
+      useAuthStore.getState().completeRegistration()
       void queryClient.invalidateQueries({ queryKey: queryKeys.auth.all })
       toast.success('Account created successfully')
     },

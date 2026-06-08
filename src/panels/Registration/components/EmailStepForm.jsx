@@ -175,7 +175,7 @@ const EmailStepForm = forwardRef(({ defaultValues, onSubmit, onBack, isSubmittin
         <button
           type="submit"
           disabled={!isStepComplete || isSubmitting}
-          className="w-full rounded-sm bg-black py-5.5 font-outfit text-base uppercase tracking-[3px] text-white disabled:opacity-60"
+          className="w-full rounded-sm bg-black py-3.5 smd:py-5.5 font-outfit text-base uppercase tracking-[3px] text-white disabled:opacity-60"
         >
           {isSubmitting ? 'Creating account...' : 'Confirm'}
         </button>

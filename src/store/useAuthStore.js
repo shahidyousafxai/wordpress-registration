@@ -12,6 +12,7 @@ export const useAuthStore = create(
       mediaKitId: null,
       mediaKitUrl: null,
       mediaKitSession: null,
+      registrationComplete: false,
       setAuth: (user, token) =>
         set((state) => {
           state.currentUser = user
@@ -22,6 +23,10 @@ export const useAuthStore = create(
           state.mediaKitId = mediaKit?.mediaKitId ?? null
           state.mediaKitUrl = mediaKit?.url ?? null
           state.mediaKitSession = mediaKit?.session ?? null
+        }),
+      completeRegistration: () =>
+        set((state) => {
+          state.registrationComplete = true
         }),
       updateUser: (updates) =>
         set((state) => {
@@ -36,6 +41,7 @@ export const useAuthStore = create(
           state.mediaKitId = null
           state.mediaKitUrl = null
           state.mediaKitSession = null
+          state.registrationComplete = false
         }),
     })),
     {
@@ -47,6 +53,7 @@ export const useAuthStore = create(
         mediaKitId: state.mediaKitId,
         mediaKitUrl: state.mediaKitUrl,
         mediaKitSession: state.mediaKitSession,
+        registrationComplete: state.registrationComplete,
       }),
     }
   )

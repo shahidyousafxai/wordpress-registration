@@ -22,6 +22,20 @@ body {
   background-color: #ffffff;
 }
 
+@layer base {
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  a[href] {
+    cursor: pointer;
+  }
+}
+
 @layer components {
   .section-width {
     @apply mx-auto max-w-[1296px];
