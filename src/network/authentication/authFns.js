@@ -1,11 +1,8 @@
-import { appEnv } from '@/network/env'
 import { post } from '@/network/http'
 import { AUTH, WORDPRESS } from '@/network/constant'
 import { generateMediaKitFn } from '@/network/mediaKit/mediaKitFns'
 import { parseMediaKitSignupResponse } from '@/network/mediaKit/mediaKitUrl'
 import { postForm } from '@/network/wordpress/wpHttp'
-
-const USE_AUTH_STUB = appEnv.useAuthStub
 
 function mapAuthUser(apiUser) {
   return {
@@ -49,67 +46,11 @@ async function creatorSignupFn(payload) {
   return normalizeAuthResponse(response)
 }
 
-async function stubLoginFn({ email }) {
-  await new Promise((resolve) => setTimeout(resolve, 400))
-
-  const name = email?.split('@')?.[0] ?? 'Creator'
-
-  return {
-    user: {
-      userId: 'demo-creator',
-      userRole: 'creator',
-      planType: 'free',
-      isNewUser: false,
-      isEmailVerified: true,
-      email,
-      firstName: name.charAt(0).toUpperCase() + name.slice(1),
-    },
-    token: 'stub-token',
-  }
-}
-
-async function stubRegisterFn({ email, firstName }) {
-  await new Promise((resolve) => setTimeout(resolve, 400))
-
-  return {
-    user: {
-      userId: 'demo-creator',
-      userRole: 'creator',
-      planType: 'free',
-      isNewUser: true,
-      isEmailVerified: false,
-      email,
-      firstName: firstName ?? null,
-    },
-    token: 'stub-token',
-    mediaKit: parseMediaKitSignupResponse({
-      result: {
-        userId: 'demo-creator',
-        email,
-        userName: email,
-        userRole: 'Creator',
-        jwtToken: 'stub-jwt',
-        refreshToken: 'stub-refresh',
-        status: 'SUCCEED',
-        mediaKitId: '4f48033d-afe0-40ee-8f02-16995c6d4f23',
-      },
-    }),
-  }
-}
-
 export function loginFn(payload) {
-  if (USE_AUTH_STUB) {
-    return stubLoginFn(payload)
-  }
-
   return post(AUTH.LOGIN, payload).then(normalizeAuthResponse)
 }
 
 export async function registerFn(payload) {
-  if (USE_AUTH_STUB) {
-    return stubRegisterFn(payload)
-  }
-
   const [authResult, mediaKitResult] = await Promise.all([
     creatorSignupFn(payload),
     generateMediaKitFn(payload),

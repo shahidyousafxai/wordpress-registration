@@ -21,7 +21,7 @@ const ThankYou = () => {
         </h1>
 
         <p className="mt-12 lg:mt-18 max-w-5xl font-raleway text-2xl md:text-4xl lg:text-[3rem] text-neutral leading-relaxed tracking-wider">
-          We're reviewing your submission, but your{' '}
+          We&apos;re reviewing your submission, but your{' '}
           {mediaKitUrl ? (
             <a
               href={mediaKitUrl}

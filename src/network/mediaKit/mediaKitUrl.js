@@ -1,3 +1,16 @@
+import { appEnv } from '@/network/env'
+
+function pickField(source, ...keys) {
+  if (!source) return null
+
+  for (const key of keys) {
+    const value = source[key]
+    if (value != null && value !== '') return value
+  }
+
+  return null
+}
+
 function normalizeUserRole(userRole) {
   if (typeof userRole === 'string') {
     return userRole.toLowerCase()
@@ -10,14 +23,15 @@ export function mapMediaKitSignupToSession(result) {
   if (!result) return null
 
   return {
-    accessToken: result.jwtToken ?? null,
-    refreshToken: result.refreshToken ?? null,
-    userId: result.userId ?? null,
-    email: result.email ?? null,
-    username: result.userName ?? result.username ?? result.email ?? null,
-    userRole: normalizeUserRole(result.userRole),
-    status: result.status ?? null,
-    message: result.message ?? null,
+    accessToken: pickField(result, 'jwtToken', 'JwtToken', 'accessToken', 'AccessToken'),
+    refreshToken: pickField(result, 'refreshToken', 'RefreshToken'),
+    userId: pickField(result, 'userId', 'UserId'),
+    email: pickField(result, 'email', 'Email'),
+    username:
+      pickField(result, 'userName', 'UserName', 'username', 'Username', 'email', 'Email'),
+    userRole: normalizeUserRole(pickField(result, 'userRole', 'UserRole')),
+    status: pickField(result, 'status', 'Status'),
+    message: pickField(result, 'message', 'Message'),
     isNewUser: true,
     isEmailVerified: false,
     emailConfirmed: null,
@@ -29,21 +43,22 @@ export function mapMediaKitSignupToSession(result) {
   }
 }
 
-export function buildMediaKitUrl(mediaKitId, session = null) {
-  const base = `https://mediakit.ilolas.com/media-kit/${mediaKitId}`
+function extractUserId(result) {
+  return pickField(result, 'userId', 'UserId')
+}
 
-  if (!session) {
-    return base
-  }
+export function buildMediaKitUrl(userId) {
+  if (!userId) return null
 
-  const sso = btoa(JSON.stringify(session))
-  return `${base}#sso=${encodeURIComponent(sso)}`
+  console.log("---------------111", `${appEnv.mediaKitAppUrl}/media-kit/${userId}`)
+  return `${appEnv.mediaKitAppUrl}/media-kit/${userId}`
 }
 
 export function parseMediaKitSignupResponse(response) {
   const result = response?.result ?? response
+  const userId = extractUserId(result)
   const session = mapMediaKitSignupToSession(result)
-  const url = buildMediaKitUrl(result.userId)
+  const url = buildMediaKitUrl(userId)
 
-  return { session, url, result }
+  return { userId, session, url, result }
 }
