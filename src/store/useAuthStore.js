@@ -9,10 +9,19 @@ export const useAuthStore = create(
     immer((set) => ({
       currentUser: null,
       accessToken: null,
+      mediaKitId: null,
+      mediaKitUrl: null,
+      mediaKitSession: null,
       setAuth: (user, token) =>
         set((state) => {
           state.currentUser = user
           state.accessToken = token
+        }),
+      setMediaKit: (mediaKit) =>
+        set((state) => {
+          state.mediaKitId = mediaKit?.mediaKitId ?? null
+          state.mediaKitUrl = mediaKit?.url ?? null
+          state.mediaKitSession = mediaKit?.session ?? null
         }),
       updateUser: (updates) =>
         set((state) => {
@@ -24,6 +33,9 @@ export const useAuthStore = create(
         set((state) => {
           state.currentUser = null
           state.accessToken = null
+          state.mediaKitId = null
+          state.mediaKitUrl = null
+          state.mediaKitSession = null
         }),
     })),
     {
@@ -32,6 +44,9 @@ export const useAuthStore = create(
       partialize: (state) => ({
         currentUser: state.currentUser,
         accessToken: state.accessToken,
+        mediaKitId: state.mediaKitId,
+        mediaKitUrl: state.mediaKitUrl,
+        mediaKitSession: state.mediaKitSession,
       }),
     }
   )

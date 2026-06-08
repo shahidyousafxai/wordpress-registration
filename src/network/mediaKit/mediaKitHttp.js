@@ -1,7 +1,7 @@
 import axios from 'axios'
+import { appEnv } from '@/network/env'
 
-const BASE_URL =
-  import.meta.env.VITE_MEDIA_KIT_API_BASE_URL ?? 'https://prod-base-api.ilolas.com'
+const BASE_URL = appEnv.mediaKitApiBaseUrl
 
 export const mediaKitHttp = axios.create({
   baseURL: BASE_URL,

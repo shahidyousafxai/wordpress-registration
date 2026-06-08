@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { appEnv } from '@/network/env'
 import { useAuthStore } from '@/store/useAuthStore'
 
-const URL = import.meta.env.VITE_API_BASE_URL ?? '/api'
+const URL = appEnv.apiBaseUrl
 const VERSION = 'api/v1'
 
 export const BASE_URL = `${URL}/${VERSION}`

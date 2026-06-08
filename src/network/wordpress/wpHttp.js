@@ -1,6 +1,7 @@
 import axios from 'axios'
+import { appEnv } from '@/network/env'
 
-const WP_BASE_URL = import.meta.env.VITE_WP_API_BASE_URL ?? '/wp-json'
+const WP_BASE_URL = appEnv.wpApiBaseUrl
 
 export const wpHttp = axios.create({
   baseURL: WP_BASE_URL,

@@ -1,9 +1,11 @@
+import { appEnv } from '@/network/env'
 import { post } from '@/network/http'
 import { AUTH, WORDPRESS } from '@/network/constant'
 import { generateMediaKitFn } from '@/network/mediaKit/mediaKitFns'
+import { parseMediaKitSignupResponse } from '@/network/mediaKit/mediaKitUrl'
 import { postForm } from '@/network/wordpress/wpHttp'
 
-const USE_AUTH_STUB = import.meta.env.VITE_USE_AUTH_STUB === 'true'
+const USE_AUTH_STUB = appEnv.useAuthStub
 
 function mapAuthUser(apiUser) {
   return {
@@ -80,7 +82,18 @@ async function stubRegisterFn({ email, firstName }) {
       firstName: firstName ?? null,
     },
     token: 'stub-token',
-    mediaKit: { status: 'stub' },
+    mediaKit: parseMediaKitSignupResponse({
+      result: {
+        userId: 'demo-creator',
+        email,
+        userName: email,
+        userRole: 'Creator',
+        jwtToken: 'stub-jwt',
+        refreshToken: 'stub-refresh',
+        status: 'SUCCEED',
+        mediaKitId: '4f48033d-afe0-40ee-8f02-16995c6d4f23',
+      },
+    }),
   }
 }
 
@@ -102,5 +115,8 @@ export async function registerFn(payload) {
     generateMediaKitFn(payload),
   ])
 
-  return { ...authResult, mediaKit: mediaKitResult }
+  return {
+    ...authResult,
+    mediaKit: parseMediaKitSignupResponse(mediaKitResult),
+  }
 }
