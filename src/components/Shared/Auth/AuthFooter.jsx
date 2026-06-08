@@ -8,7 +8,7 @@ const AuthFooter = () => {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="w-full border-t border-black px-4 smd:px-8 py-4 smd:py-5 mt-auto">
+    <footer className="w-full border-t border-black py-4 smd:py-5 mt-auto">
       <div className="section-width flex flex-col items-center gap-3 smd:flex-row smd:items-center smd:justify-between">
         <p className="font-outfit text-xs smd:text-base">
           © ILOLA {year}
