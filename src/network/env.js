@@ -7,6 +7,8 @@ const DEFAULTS = {
     : '/base-api',
   mediaKitAppUrl: 'https://mediakit.ilolas.com',
   shopUrl: 'https://app.ilolas.com/shop',
+  mediaKitAuthCookieName: '_wp_knock',
+  mediaKitCookieDomain: '.ilolas.com',
 }
 
 function readString(key, fallback) {
@@ -29,4 +31,12 @@ export const appEnv = {
   mediaKitApiBaseUrl: readString('VITE_MEDIA_KIT_API_BASE_URL', DEFAULTS.mediaKitApiBaseUrl),
   mediaKitAppUrl: readString('VITE_MEDIA_KIT_APP_URL', DEFAULTS.mediaKitAppUrl),
   shopUrl: readString('VITE_SHOP_URL', DEFAULTS.shopUrl),
+  mediaKitAuthCookieName: readString(
+    'VITE_MEDIA_KIT_AUTH_COOKIE_NAME',
+    DEFAULTS.mediaKitAuthCookieName
+  ),
+  mediaKitCookieDomain: readString(
+    'VITE_MEDIA_KIT_COOKIE_DOMAIN',
+    DEFAULTS.mediaKitCookieDomain
+  ),
 }

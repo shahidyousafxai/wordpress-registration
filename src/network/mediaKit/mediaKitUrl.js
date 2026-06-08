@@ -1,5 +1,3 @@
-import { appEnv } from '@/network/env'
-
 function normalizeUserRole(userRole) {
   if (typeof userRole === 'string') {
     return userRole.toLowerCase()
@@ -31,19 +29,8 @@ export function mapMediaKitSignupToSession(result) {
   }
 }
 
-function extractMediaKitId(result, response) {
-  return (
-    result?.mediaKitId ??
-    result?.mediaKitUUID ??
-    result?.mediaKitGuid ??
-    result?.kitId ??
-    response?.mediaKitId ??
-    null
-  )
-}
-
 export function buildMediaKitUrl(mediaKitId, session = null) {
-  const base = `${appEnv.mediaKitAppUrl}/media-kit/${mediaKitId}`
+  const base = `https://mediakit.ilolas.com/media-kit/${mediaKitId}`
 
   if (!session) {
     return base
@@ -55,9 +42,8 @@ export function buildMediaKitUrl(mediaKitId, session = null) {
 
 export function parseMediaKitSignupResponse(response) {
   const result = response?.result ?? response
-  const mediaKitId = extractMediaKitId(result, response)
   const session = mapMediaKitSignupToSession(result)
-  const url = mediaKitId ? buildMediaKitUrl(mediaKitId) : null
+  const url = buildMediaKitUrl(result.userId)
 
-  return { mediaKitId, session, url, result }
+  return { session, url, result }
 }

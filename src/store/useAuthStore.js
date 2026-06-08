@@ -1,3 +1,4 @@
+import { clearMediaKitAuthCookie } from '@/network/mediaKit/mediaKitAuthCookie'
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
@@ -34,7 +35,8 @@ export const useAuthStore = create(
             Object.assign(state.currentUser, updates)
           }
         }),
-      clearAuth: () =>
+      clearAuth: () => {
+        clearMediaKitAuthCookie()
         set((state) => {
           state.currentUser = null
           state.accessToken = null
@@ -42,7 +44,8 @@ export const useAuthStore = create(
           state.mediaKitUrl = null
           state.mediaKitSession = null
           state.registrationComplete = false
-        }),
+        })
+      },
     })),
     {
       name: AUTH_STORAGE_KEY,

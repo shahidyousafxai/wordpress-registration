@@ -3,6 +3,7 @@ import { toast } from 'sonner'
 import { queryKeys } from '@/network/http'
 import { messageFromAxiosError } from '@/utils'
 import { useAuthStore } from '@/store/useAuthStore'
+import { setMediaKitAuthCookie } from '@/network/mediaKit/mediaKitAuthCookie'
 import { loginFn, registerFn } from './authFns'
 
 export function useLoginMutation() {
@@ -29,6 +30,7 @@ export function useRegisterMutation() {
     onSuccess: ({ user, token, mediaKit }) => {
       useAuthStore.getState().setAuth(user, token)
       useAuthStore.getState().setMediaKit(mediaKit)
+      setMediaKitAuthCookie(mediaKit?.session)
       useAuthStore.getState().completeRegistration()
       void queryClient.invalidateQueries({ queryKey: queryKeys.auth.all })
       toast.success('Account created successfully')
