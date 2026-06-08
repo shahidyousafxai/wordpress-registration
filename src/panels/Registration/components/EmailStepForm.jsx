@@ -5,7 +5,6 @@ import { AuthHeading } from '@/components/Shared/Auth'
 import { emailStepSchema } from '@/validations'
 import { cn } from '@/utils'
 import { MailIcon } from '@/assets/icons/MailIcon'
-import BackArrowIcon from '@/assets/icons/BackArrowIcon'
 import VisibilityIcon from '@/assets/icons/VisibilityIcon'
 import VisibilityOffIcon from '@/assets/icons/VisibilityOffIcon'
 
@@ -68,7 +67,7 @@ function PasswordField({
   )
 }
 
-const EmailStepForm = forwardRef(({ defaultValues, onSubmit, onBack, isSubmitting = false }, ref) => {
+const EmailStepForm = forwardRef(({ defaultValues, onSubmit, isSubmitting = false }, ref) => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
@@ -112,17 +111,7 @@ const EmailStepForm = forwardRef(({ defaultValues, onSubmit, onBack, isSubmittin
     password === confirmPassword
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col justify-between space-y-16 py-10 max-base:h-[80dvh] px-4 relative">
-      <button
-        type="button"
-        onClick={onBack}
-        aria-label="Go back"
-        className="flex items-center gap-2 font-outfit text-sm uppercase tracking-[2px] text-primary-black cursor-pointer absolute top-2 left-3 underline"
-      >
-        <BackArrowIcon className="size-7" />
-        Back
-      </button>
-
+    <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col justify-between space-y-16 py-10 max-base:h-[80dvh] px-4">
       <AuthHeading
         title="Where would you like collabs sent?"
         subtitle="(We only send important info)"
