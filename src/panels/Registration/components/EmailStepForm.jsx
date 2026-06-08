@@ -187,10 +187,10 @@ const EmailStepForm = forwardRef(({ defaultValues, onSubmit, onBack, isSubmittin
             className="mt-1 size-4 shrink-0 accent-primary-black"
           />
           <span className="font-raleway text-sm leading-relaxed text-black smd:text-base">
-            I agree to ILOLA&apos;s{' '}
-            <a href="#" className="underline">T&amp;C</a>,{' '}
+            I agree to ILOLA's{' '}
+            <a href="#" className="underline">T&C</a>,{' '}
             <a href="#" className="underline">Privacy Policy</a>
-            {' '}&amp; to receive emails &amp; texts relevant to ILOLA™.
+            {' '}& to receive communication relevant to ILOLA™.
           </span>
         </label>
         {errors.terms?.message && (
