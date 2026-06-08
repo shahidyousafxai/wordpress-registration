@@ -14,6 +14,8 @@ const Registration = () => {
     firstName: '',
     instagramUsername: '',
     email: '',
+    password: '',
+    confirmPassword: '',
     terms: false,
   })
 
@@ -31,6 +33,7 @@ const Registration = () => {
         firstName: payload.firstName,
         instagramUsername: payload.instagramUsername,
         email: payload.email,
+        password: payload.password,
       },
       {
         onSuccess: () => {

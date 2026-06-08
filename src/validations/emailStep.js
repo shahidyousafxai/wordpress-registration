@@ -1,9 +1,16 @@
 import { z } from 'zod'
-import { emailSchema } from './fields'
+import { emailSchema, passwordSchema } from './fields'
 
-export const emailStepSchema = z.object({
-  email: emailSchema,
-  terms: z.boolean().refine((value) => value === true, {
-    message: 'You must agree to the terms to continue',
-  }),
-})
+export const emailStepSchema = z
+  .object({
+    email: emailSchema,
+    password: passwordSchema,
+    confirmPassword: z.string().min(1, 'Please confirm your password'),
+    terms: z.boolean().refine((value) => value === true, {
+      message: 'You must agree to the terms to continue',
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
+  })
