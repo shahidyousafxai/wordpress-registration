@@ -1,7 +1,9 @@
+import { appEnv } from '@/network/env'
+import { TermsConditionsLink } from './TermsConditionsPicker'
+
 const FOOTER_LINKS = [
-  { label: 'Terms & Conditions', href: '#' },
-  { label: 'Privacy Policy', href: '#' },
-  { label: 'Contact', href: '#' },
+  { label: 'Privacy Policy', href: appEnv.privacyPolicyUrl },
+  { label: 'Contact', href: appEnv.contactUrl },
 ]
 
 const AuthFooter = () => {
@@ -15,10 +17,18 @@ const AuthFooter = () => {
         </p>
 
         <nav className="flex flex-wrap items-center justify-center gap-4 smd:gap-6">
+          <TermsConditionsLink
+            className="font-outfit text-xs smd:text-base hover:underline"
+            placement="top"
+          >
+            Terms &amp; Conditions
+          </TermsConditionsLink>
           {FOOTER_LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-outfit text-xs smd:text-base hover:underline"
             >
               {link.label}

@@ -1,8 +1,9 @@
 import { forwardRef, useImperativeHandle, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { AuthHeading } from '@/components/Shared/Auth'
+import { AuthHeading, TermsConditionsLink } from '@/components/Shared/Auth'
 import { emailStepSchema } from '@/validations'
+import { appEnv } from '@/network/env'
 import { cn } from '@/utils'
 import { MailIcon } from '@/assets/icons/MailIcon'
 import VisibilityIcon from '@/assets/icons/VisibilityIcon'
@@ -177,8 +178,18 @@ const EmailStepForm = forwardRef(({ defaultValues, onSubmit, isSubmitting = fals
           />
           <span className="font-raleway text-sm leading-relaxed text-black smd:text-base">
             I agree to ILOLA's{' '}
-            <a href="#" className="underline">T&C</a>,{' '}
-            <a href="#" className="underline">Privacy Policy</a>
+            <TermsConditionsLink className="underline" stopPropagation>
+              T&C
+            </TermsConditionsLink>,{' '}
+            <a
+              href={appEnv.privacyPolicyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+              onClick={(e) => e.stopPropagation()}
+            >
+              Privacy Policy
+            </a>
             {' '}& to receive communication relevant to ILOLA™.
           </span>
         </label>

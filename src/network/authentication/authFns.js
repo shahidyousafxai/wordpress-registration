@@ -1,5 +1,4 @@
-import { post } from '@/network/http'
-import { AUTH, WORDPRESS } from '@/network/constant'
+import { WORDPRESS } from '@/network/constant'
 import { generateMediaKitFn } from '@/network/mediaKit/mediaKitFns'
 import { parseMediaKitSignupResponse } from '@/network/mediaKit/mediaKitUrl'
 import { postForm } from '@/network/wordpress/wpHttp'
@@ -17,12 +16,13 @@ function mapAuthUser(apiUser) {
 }
 
 function normalizeAuthResponse(response) {
-  const payload = response?.data ?? response
-  const user = mapAuthUser(payload?.user ?? payload?.currentUser ?? payload?.data ?? payload)
+  const user = mapAuthUser(
+    response?.user ?? response?.currentUser ?? response?.data ?? response
+  )
   const token =
-    payload?.accessToken ??
-    payload?.access_token ??
-    payload?.token ??
+    response?.accessToken ??
+    response?.access_token ??
+    response?.token ??
     null
 
   return { user, token }
@@ -46,8 +46,13 @@ async function creatorSignupFn(payload) {
   return normalizeAuthResponse(response)
 }
 
+async function validateLoginFn({ email, password }) {
+  const response = await postForm(WORDPRESS.VALIDATE, { email, password })
+  return normalizeAuthResponse(response)
+}
+
 export function loginFn(payload) {
-  return post(AUTH.LOGIN, payload).then(normalizeAuthResponse)
+  return validateLoginFn(payload)
 }
 
 export async function registerFn(payload) {

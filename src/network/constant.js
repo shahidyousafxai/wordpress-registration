@@ -6,6 +6,7 @@ export const AUTH = {
 
 export const WORDPRESS = {
   CREATOR_SIGNUP: '/jwt-sso/v1/creator-signup',
+  VALIDATE: '/jwt-sso/v1/validate',
 }
 
 export const MEDIA_KIT = {

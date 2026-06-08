@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
+import { appEnv } from '@/network/env'
 import { queryKeys } from '@/network/http'
 import { messageFromAxiosError } from '@/utils'
 import { useAuthStore } from '@/store/useAuthStore'
@@ -14,7 +15,7 @@ export function useLoginMutation() {
     onSuccess: ({ user, token }) => {
       useAuthStore.getState().setAuth(user, token)
       void queryClient.invalidateQueries({ queryKey: queryKeys.auth.all })
-      toast.success('Welcome back!')
+      window.location.assign(appEnv.influencerDashboardUrl)
     },
     onError: (error) => {
       toast.error(messageFromAxiosError(error, 'Login failed'))
