@@ -1,6 +1,8 @@
+const WP_API_ORIGIN = 'https://app.ilolas.com'
+
 const DEFAULTS = {
   apiBaseUrl: '/api',
-  wpApiBaseUrl: '/wp-json',
+  wpApiBaseUrl: import.meta.env.PROD ? `${WP_API_ORIGIN}/wp-json` : '/wp-json',
   mediaKitApiBaseUrl: import.meta.env.PROD
     ? 'https://prod-base-api.ilolas.com'
     : '/base-api',
@@ -8,6 +10,7 @@ const DEFAULTS = {
   shopUrl: 'https://app.ilolas.com/shop',
   mediaKitAuthCookieName: '_wp_knock',
   mediaKitCookieDomain: '.ilolas.com',
+  wpSsoSystemToken: '',
 }
 
 function readString(key, fallback) {
@@ -30,4 +33,5 @@ export const appEnv = {
     'VITE_MEDIA_KIT_COOKIE_DOMAIN',
     DEFAULTS.mediaKitCookieDomain
   ),
+  wpSsoSystemToken: readString('VITE_SSO_SYSTEM_TOKEN', DEFAULTS.wpSsoSystemToken),
 }

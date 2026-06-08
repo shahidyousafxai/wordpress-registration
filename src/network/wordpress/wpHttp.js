@@ -1,14 +1,19 @@
 import axios from 'axios'
 import { appEnv } from '@/network/env'
 
-const WP_BASE_URL = appEnv.wpApiBaseUrl
-
 export const wpHttp = axios.create({
-  baseURL: WP_BASE_URL,
+  baseURL: appEnv.wpApiBaseUrl,
   timeout: 30_000,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
   },
+})
+
+wpHttp.interceptors.request.use((config) => {
+  if (appEnv.wpSsoSystemToken) {
+    config.headers['sso-system-token'] = appEnv.wpSsoSystemToken
+  }
+  return config
 })
 
 export function postForm(url, params) {

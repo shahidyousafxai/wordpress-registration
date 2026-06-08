@@ -37,6 +37,9 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react(), tailwindcss()],
+    define: {
+      'import.meta.env.VITE_SSO_SYSTEM_TOKEN': JSON.stringify(env.SSO_SYSTEM_TOKEN ?? ''),
+    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
