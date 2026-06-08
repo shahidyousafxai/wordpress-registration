@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AuthHeading } from '@/components/Shared/Auth'
 import TextField from '@/components/Shared/TextField'
@@ -12,6 +12,7 @@ const CreatorApplicationForm = ({ defaultValues, onSubmit }) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(creatorApplicationSchema),
@@ -21,7 +22,19 @@ const CreatorApplicationForm = ({ defaultValues, onSubmit }) => {
       instagramUsername: '',
       ...defaultValues,
     },
+    values: {
+      firstName: defaultValues.firstName ?? '',
+      instagramUsername: defaultValues.instagramUsername ?? '',
+    },
   })
+
+  const [firstName, instagramUsername] = useWatch({
+    control,
+    name: ['firstName', 'instagramUsername'],
+  })
+  const isStepComplete =
+    Boolean(firstName?.trim()) &&
+    Boolean(instagramUsername?.replace(/^@/, '').trim())
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col py-10 px-4">
@@ -85,7 +98,8 @@ const CreatorApplicationForm = ({ defaultValues, onSubmit }) => {
 
         <button
           type="submit"
-          className="w-full mt-17 rounded-sm bg-black py-3.5 smd:py-5.5 font-outfit text-sm smd:text-base uppercase tracking-[3px] text-white"
+          disabled={!isStepComplete}
+          className="w-full mt-17 rounded-sm bg-black py-3.5 smd:py-5.5 font-outfit text-sm smd:text-base uppercase tracking-[3px] text-white disabled:opacity-60"
         >
           Check Eligibility
         </button>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthLayout } from '@/components/Shared/Auth'
 import CreatorApplicationForm from './components/CreatorApplicationForm'
@@ -9,6 +9,7 @@ import { ROUTE_PATHS } from '@/router/constants'
 const Registration = () => {
   const navigate = useNavigate()
   const registerMutation = useRegisterMutation()
+  const emailStepRef = useRef(null)
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
     firstName: '',
@@ -22,6 +23,14 @@ const Registration = () => {
   const handleCreatorSubmit = (values) => {
     setFormData((prev) => ({ ...prev, ...values }))
     setStep(2)
+  }
+
+  const handleBackFromStep2 = () => {
+    const step2Values = emailStepRef.current?.getStepValues()
+    if (step2Values) {
+      setFormData((prev) => ({ ...prev, ...step2Values }))
+    }
+    setStep(1)
   }
 
   const handleEmailSubmit = (values) => {
@@ -46,7 +55,7 @@ const Registration = () => {
   return (
     <AuthLayout
       showBack={step === 2}
-      onBack={() => setStep(1)}
+      onBack={handleBackFromStep2}
     >
       {step === 1 ? (
         <CreatorApplicationForm
@@ -55,8 +64,10 @@ const Registration = () => {
         />
       ) : (
         <EmailStepForm
+          ref={emailStepRef}
           defaultValues={formData}
           onSubmit={handleEmailSubmit}
+          onBack={handleBackFromStep2}
           isSubmitting={registerMutation.isPending}
         />
       )}

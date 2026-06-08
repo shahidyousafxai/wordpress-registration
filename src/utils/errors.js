@@ -5,6 +5,7 @@ export function messageFromAxiosError(error, fallback = 'Something went wrong') 
     data?.message ??
     data?.data?.message ??
     data?.error?.message ??
+    (typeof data === 'string' ? data : undefined) ??
     (typeof error?.message === 'string' ? error.message : undefined) ??
     fallback
   )

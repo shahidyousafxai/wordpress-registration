@@ -1,10 +1,11 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { forwardRef, useImperativeHandle, useState } from 'react'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AuthHeading } from '@/components/Shared/Auth'
 import { emailStepSchema } from '@/validations'
 import { cn } from '@/utils'
 import { MailIcon } from '@/assets/icons/MailIcon'
+import BackArrowIcon from '@/assets/icons/BackArrowIcon'
 import VisibilityIcon from '@/assets/icons/VisibilityIcon'
 import VisibilityOffIcon from '@/assets/icons/VisibilityOffIcon'
 
@@ -67,13 +68,15 @@ function PasswordField({
   )
 }
 
-const EmailStepForm = ({ defaultValues, onSubmit, isSubmitting = false }) => {
+const EmailStepForm = forwardRef(({ defaultValues, onSubmit, onBack, isSubmitting = false }, ref) => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const {
     register,
     handleSubmit,
+    control,
+    getValues,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(emailStepSchema),
@@ -85,10 +88,41 @@ const EmailStepForm = ({ defaultValues, onSubmit, isSubmitting = false }) => {
       terms: false,
       ...defaultValues,
     },
+    values: {
+      email: defaultValues.email ?? '',
+      password: defaultValues.password ?? '',
+      confirmPassword: defaultValues.confirmPassword ?? '',
+      terms: defaultValues.terms ?? false,
+    },
   })
 
+  useImperativeHandle(ref, () => ({
+    getStepValues: () => getValues(),
+  }))
+
+  const [email, password, confirmPassword, terms] = useWatch({
+    control,
+    name: ['email', 'password', 'confirmPassword', 'terms'],
+  })
+  const isStepComplete =
+    Boolean(email?.trim()) &&
+    Boolean(password) &&
+    Boolean(confirmPassword) &&
+    terms === true &&
+    password === confirmPassword
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col justify-between space-y-16 py-10 max-base:h-[80dvh] px-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col justify-between space-y-16 py-10 max-base:h-[80dvh] px-4 relative">
+      <button
+        type="button"
+        onClick={onBack}
+        aria-label="Go back"
+        className="flex items-center gap-2 font-outfit text-sm uppercase tracking-[2px] text-primary-black cursor-pointer absolute top-2 left-3 underline"
+      >
+        <BackArrowIcon className="size-7" />
+        Back
+      </button>
+
       <AuthHeading
         title="Where would you like collabs sent?"
         subtitle="(We only send important info)"
@@ -140,7 +174,7 @@ const EmailStepForm = ({ defaultValues, onSubmit, isSubmitting = false }) => {
       <div className="w-full max-w-[365px] mx-auto space-y-5.5">
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={!isStepComplete || isSubmitting}
           className="w-full rounded-sm bg-black py-5.5 font-outfit text-base uppercase tracking-[3px] text-white disabled:opacity-60"
         >
           {isSubmitting ? 'Creating account...' : 'Confirm'}
@@ -165,6 +199,8 @@ const EmailStepForm = ({ defaultValues, onSubmit, isSubmitting = false }) => {
       </div>
     </form>
   )
-}
+})
+
+EmailStepForm.displayName = 'EmailStepForm'
 
 export default EmailStepForm
