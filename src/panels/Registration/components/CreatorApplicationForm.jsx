@@ -43,24 +43,6 @@ const CreatorApplicationForm = ({ defaultValues, onSubmit }) => {
       <div className="mt-12 flex flex-col gap-5 items-center max-w-[365px] mx-auto w-full">
 
         <div className='flex flex-col gap-14 w-full'>
-          {/* <button
-            type="button"
-            className="flex w-full items-center justify-center gap-2 rounded border border-primary-black px-4 py-3.5 smd:py-5.5 font-outfit text-sm smd:text-base uppercase tracking-[3px] text-primary-black"
-          >
-            <div className="pointer-events-none text-primary-black">
-              <InstagramIcon width={18} height={18} className="rounded-full bg-primary-black p-1 text-primary-white size-6" />
-            </div>
-            Register with Instagram
-          </button> */}
-
-          {/* <div className="center gap-2">
-            <span className="h-px w-10 bg-neutral-light3" />
-            <span className="font-nunito text-base text-neutral whitespace-nowrap">
-              or enter Instagram username
-            </span>
-            <span className="h-px w-10 bg-neutral-light3" />
-          </div> */}
-
           <div className='flex flex-col gap-8'>
             <TextField
               {...register('firstName')}
@@ -82,7 +64,7 @@ const CreatorApplicationForm = ({ defaultValues, onSubmit }) => {
                   {...register('instagramUsername')}
                   placeholder="Instagram Username"
                   className={cn(
-                    'indent-9 w-full! rounded-none! border py-3 pl-10 pr-3 text-2xl font-baskervville outline-none transition-colors',
+                    'w-full! rounded-none! border py-3 pl-18 pr-3 text-2xl font-baskervville outline-none transition-colors',
                     'border-neutral-light3 focus:border-black placeholder:text-neutral',
                     errors.instagramUsername && 'border-error focus:border-error'
                   )}

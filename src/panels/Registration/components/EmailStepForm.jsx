@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { AuthHeading, TermsConditionsLink } from '@/components/Shared/Auth'
+import { AuthFormError, AuthHeading, TermsConditionsLink } from '@/components/Shared/Auth'
 import { emailStepSchema } from '@/validations'
 import { appEnv } from '@/network/env'
 import { cn } from '@/utils'
@@ -20,6 +20,7 @@ function PasswordField({
   showPassword,
   onToggleVisibility,
   autoComplete,
+  showInlineError = true,
 }) {
   return (
     <div className="flex flex-col gap-2 w-full">
@@ -61,14 +62,14 @@ function PasswordField({
           </button>
         </div>
       </fieldset>
-      {error?.message && (
+      {showInlineError && error?.message && (
         <p className="text-xs font-nunito text-error">{error.message}</p>
       )}
     </div>
   )
 }
 
-const EmailStepForm = forwardRef(({ defaultValues, onSubmit, isSubmitting = false }, ref) => {
+const EmailStepForm = forwardRef(({ defaultValues, onSubmit, isSubmitting = false, submitError = null }, ref) => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
@@ -118,7 +119,11 @@ const EmailStepForm = forwardRef(({ defaultValues, onSubmit, isSubmitting = fals
         subtitle="(We only send important info)"
       />
 
-      <div className="flex flex-col gap-8 w-full max-w-[365px] mx-auto">
+      <div className="mx-auto flex w-full max-w-[365px] flex-col gap-8">
+        {(submitError || errors.password?.message) && (
+          <AuthFormError message={submitError ?? errors.password?.message} />
+        )}
+
         <div className="flex flex-col gap-1.5 w-full">
           <div className="relative">
             <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-dark1">
@@ -148,6 +153,7 @@ const EmailStepForm = forwardRef(({ defaultValues, onSubmit, isSubmitting = fals
           showPassword={showPassword}
           onToggleVisibility={() => setShowPassword((prev) => !prev)}
           autoComplete="new-password"
+          showInlineError={false}
         />
 
         <PasswordField

@@ -2,7 +2,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { appEnv } from '@/network/env'
 import { queryKeys } from '@/network/http'
-import { messageFromAxiosError } from '@/utils'
 import { useAuthStore } from '@/store/useAuthStore'
 import { setMediaKitAuthCookie } from '@/network/mediaKit/mediaKitAuthCookie'
 import { loginFn, registerFn } from './authFns'
@@ -16,9 +15,6 @@ export function useLoginMutation() {
       useAuthStore.getState().setAuth(user, token)
       void queryClient.invalidateQueries({ queryKey: queryKeys.auth.all })
       window.location.assign(appEnv.influencerDashboardUrl)
-    },
-    onError: (error) => {
-      toast.error(messageFromAxiosError(error, 'Login failed'))
     },
   })
 }
@@ -35,9 +31,6 @@ export function useRegisterMutation() {
       useAuthStore.getState().completeRegistration()
       void queryClient.invalidateQueries({ queryKey: queryKeys.auth.all })
       toast.success('Account created successfully')
-    },
-    onError: (error) => {
-      toast.error(messageFromAxiosError(error, 'Registration failed'))
     },
   })
 }

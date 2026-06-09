@@ -5,6 +5,7 @@ import CreatorApplicationForm from './components/CreatorApplicationForm'
 import EmailStepForm from './components/EmailStepForm'
 import { useRegisterMutation } from '@/network/authentication/authQueries'
 import { ROUTE_PATHS } from '@/router/constants'
+import { messageFromAxiosError } from '@/utils'
 
 const Registration = () => {
   const navigate = useNavigate()
@@ -36,6 +37,7 @@ const Registration = () => {
   const handleEmailSubmit = (values) => {
     const payload = { ...formData, ...values }
     setFormData(payload)
+    registerMutation.reset()
 
     registerMutation.mutate(
       {
@@ -69,6 +71,11 @@ const Registration = () => {
           onSubmit={handleEmailSubmit}
           onBack={handleBackFromStep2}
           isSubmitting={registerMutation.isPending}
+          submitError={
+            registerMutation.error
+              ? messageFromAxiosError(registerMutation.error, 'Registration failed')
+              : null
+          }
         />
       )}
     </AuthLayout>

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { AuthHeading } from '@/components/Shared/Auth'
+import { AuthFormError, AuthHeading } from '@/components/Shared/Auth'
 import TextField from '@/components/Shared/TextField'
 // import InstagramIcon from '@/assets/icons/InstagramIcon'
 import VisibilityIcon from '@/assets/icons/VisibilityIcon'
@@ -14,7 +14,7 @@ import { cn } from '@/utils'
 const AUTH_INPUT_HEIGHT =
   'h-[52px] min-h-[52px] box-border text-lg font-nunito leading-none'
 
-const LoginForm = ({ welcomeName, onSubmit, isSubmitting = false }) => {
+const LoginForm = ({ welcomeName, onSubmit, isSubmitting = false, submitError = null }) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const {
@@ -37,6 +37,9 @@ const LoginForm = ({ welcomeName, onSubmit, isSubmitting = false }) => {
       <AuthHeading title={headingTitle} />
 
       <div className="mt-12 flex flex-col gap-5 items-center max-w-[365px] mx-auto w-full">
+        {submitError && (
+          <AuthFormError message={submitError} />
+        )}
         <div className="flex flex-col gap-14 w-full">
           {/* <button
             type="button"

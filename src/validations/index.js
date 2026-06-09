@@ -1,6 +1,7 @@
 export {
   emailSchema,
   passwordSchema,
+  registrationPasswordSchema,
   requiredString,
 } from './fields'
 export { registrationSchema } from './registration'

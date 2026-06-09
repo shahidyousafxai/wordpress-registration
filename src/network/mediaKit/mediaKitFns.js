@@ -1,4 +1,5 @@
 import { MEDIA_KIT } from '@/network/constant'
+import { extractExceptionMessage } from '@/utils/errors'
 import { postJson } from './mediaKitHttp'
 
 function toMediaKitPayload({ email, password, firstName, instagramUsername }) {
@@ -19,9 +20,9 @@ function assertMediaKitSuccess(response) {
   if (response?.isError) {
     const exception = response?.responseException?.exceptionMessage
     const message =
-      typeof exception === 'string'
-        ? exception
-        : exception?.title ?? 'Media kit generation failed'
+      extractExceptionMessage(exception) ??
+      (typeof exception === 'object' ? exception?.title : undefined) ??
+      'Media kit generation failed'
 
     throw new Error(message)
   }
