@@ -64,7 +64,7 @@ const CreatorApplicationForm = ({ defaultValues, onSubmit }) => {
                   {...register('instagramUsername')}
                   placeholder="Instagram Username"
                   className={cn(
-                    'w-full! rounded-none! border py-3 pl-18 pr-3 text-2xl font-baskervville outline-none transition-colors',
+                    'w-full! rounded-none! border py-3 pl-20 pr-3 text-2xl font-baskervville outline-none transition-colors',
                     'border-neutral-light3 focus:border-black placeholder:text-neutral',
                     errors.instagramUsername && 'border-error focus:border-error'
                   )}
