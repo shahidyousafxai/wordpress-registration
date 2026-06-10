@@ -5,7 +5,7 @@ const ThankYou = () => {
   const mediaKitUrl = useAuthStore((state) => state.mediaKitUrl)
 
   return (
-    <div className="min-h-screen bg-primary-white px-4 md:px-6 py-12 text-center">
+    <div className="min-h-screen bg-primary-white px-4 md:px-6 py-8 text-center">
 
       <div className="flex flex-col items-center text-center">
         <img
@@ -16,18 +16,20 @@ const ThankYou = () => {
       </div>
 
       <div className="flex flex-col items-center justify-center w-full">
-        <h1 className="mt-14 font-notodisplay text-3xl md:text-5xl lg:text-[4rem] font-light text-primary-black">
+        <h1 className="mt-14 font-notodisplay text-5xl sm:text-5xl lg:text-[4rem] leading-16 font-normal text-primary-black">
           Application Received
         </h1>
 
-        <p className="mt-12 lg:mt-18 max-w-5xl font-raleway text-2xl md:text-4xl lg:text-[3rem] text-neutral leading-relaxed tracking-wider">
+        <span className="mt-10 sm:mt-18 block h-[2px] w-16 bg-primary-black" />
+
+        <p className="mt-10 sm:mt-12 font-raleway text-base sm:text-[1.5rem] text-neutral leading-relaxed tracking-wider">
           We&apos;re reviewing your submission, but your{' '}
           {mediaKitUrl ? (
             <a
               href={mediaKitUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="italic text-primary-black underline underline-offset-2 decoration-2"
+              className="italic text-primary-black underline underline-offset-1 decoration-1"
             >
               Media Kit
             </a>
@@ -37,11 +39,11 @@ const ThankYou = () => {
           is now available!
         </p>
 
-        <span className="mt-5 block h-[2px] w-[18%] min-w-[72px] bg-primary-black" />
+        <span className="mt-10 sm:mt-13 block h-[2px] w-16 bg-primary-black" />
       </div>
 
-      <div className="mt-16 flex flex-col items-center">
-        <p className="font-notodisplay text-2xl md:text-3xl text-primary-black">
+      <div className="mt-10 sm:mt-16 flex flex-col items-center">
+        <p className="font-notodisplay text-base sm:text-3xl text-primary-black">
           We found your best content and data.
         </p>
 

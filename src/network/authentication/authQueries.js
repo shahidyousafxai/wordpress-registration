@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { toast } from 'sonner'
 import { appEnv } from '@/network/env'
 import { queryKeys } from '@/network/http'
 import { useAuthStore } from '@/store/useAuthStore'
@@ -30,7 +29,6 @@ export function useRegisterMutation() {
       setMediaKitAuthCookie(mediaKit?.session)
       useAuthStore.getState().completeRegistration()
       void queryClient.invalidateQueries({ queryKey: queryKeys.auth.all })
-      toast.success('Account created successfully')
     },
   })
 }
