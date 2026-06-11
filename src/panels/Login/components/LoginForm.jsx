@@ -41,21 +41,6 @@ const LoginForm = ({ welcomeName, onSubmit, isSubmitting = false, submitError = 
           <AuthFormError message={submitError} />
         )}
         <div className="flex flex-col gap-14 w-full">
-          {/* <button
-            type="button"
-            className="flex w-full items-center justify-center gap-2 rounded border border-primary-black px-4 py-3.5 smd:py-5.5 font-outfit text-sm smd:text-base uppercase tracking-[3px] text-primary-black"
-          >
-            <InstagramIcon width={18} height={18} className="rounded-full bg-primary-black p-1 text-primary-white size-6" />
-            Login with Instagram
-          </button>
-
-          <div className="center">
-            <span className="h-px w-10 bg-neutral-light3" />
-            <span className="font-nunito text-base text-neutral whitespace-nowrap">
-              or enter Instagram username
-            </span>
-            <span className="h-px w-10 bg-neutral-light3" />
-          </div> */}
 
           <div className="flex flex-col gap-8">
             <TextField
