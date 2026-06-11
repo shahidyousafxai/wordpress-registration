@@ -46,7 +46,7 @@ function PasswordField({
             {...register(name)}
             type={showPassword ? 'text' : 'password'}
             autoComplete={autoComplete}
-            className="h-full w-full border-0 bg-transparent pr-10 text-lg font-nunito leading-none outline-none tracking-[1px]"
+            className="h-full w-full border-0 bg-transparent pr-10 text-lg font-nunito leading-none outline-none"
           />
           <button
             type="button"
@@ -113,7 +113,7 @@ const EmailStepForm = forwardRef(({ defaultValues, onSubmit, isSubmitting = fals
     password === confirmPassword
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col justify-between space-y-16 py-10 max-base:h-200 px-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col space-y-16 py-10 max-base:h-fit px-4">
       <AuthHeading
         title="Where would you like collabs sent?"
         subtitle="(We only send important info)"
@@ -134,7 +134,7 @@ const EmailStepForm = forwardRef(({ defaultValues, onSubmit, isSubmitting = fals
               placeholder="Email Address"
               autoComplete="email"
               className={cn(
-                'w-full! rounded-none! border py-3 pl-10 pr-3 text-2xl font-baskervville outline-none transition-colors tracking-[1px]',
+                'w-full! rounded-none! border py-3 pl-10 pr-3 text-2xl font-baskervville outline-none transition-colors',
                 'border-neutral-light3 focus:border-black placeholder:text-neutral',
                 errors.email && 'border-error focus:border-error'
               )}

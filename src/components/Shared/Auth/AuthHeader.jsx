@@ -2,7 +2,7 @@ import BackArrowIcon from "@/assets/icons/BackArrowIcon"
 
 
 const AuthHeader = ({ showBack = false, onBack }) => (
-  <header className="w-full py-6 smd:py-8">
+  <header className="w-full py-10">
     <div className="section-width grid grid-cols-[2.5rem_1fr_2.5rem] items-start smd:grid-cols-[3rem_1fr_3rem]">
       <div className="flex items-center justify-start">
         {showBack ? (
@@ -23,7 +23,7 @@ const AuthHeader = ({ showBack = false, onBack }) => (
         <img
           src="/logo.png"
           alt="ILOLA"
-          className="h-12 smd:h-18 w-auto"
+          className="h-14 smd:h-18 w-auto"
         />
       </div>
 

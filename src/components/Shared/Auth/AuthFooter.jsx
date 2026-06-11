@@ -11,7 +11,7 @@ const AuthFooter = () => {
 
   return (
     <footer className="w-full border-t border-black py-4 smd:py-5 mt-auto">
-      <div className="section-width flex gap-3 items-center justify-between">
+      <div className="section-width flex gap-3 flex-col sm:flex-row items-center justify-between">
         <p className="font-outfit text-xs smd:text-base">
           © ILOLA {year}
         </p>

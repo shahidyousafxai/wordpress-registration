@@ -16,7 +16,7 @@ const AuthLayout = ({ children, showBack = false, onBack }) => (
           />
         </div>
 
-        <div className="flex w-full flex-1 flex-col bg-primary-white border border-neutral-light1 rounded-lg">
+        <div className="flex w-full flex-1 flex-col bg-primary-white border border-neutral-light1 rounded-lg max-base:mt-5">
           {children}
         </div>
       </div>

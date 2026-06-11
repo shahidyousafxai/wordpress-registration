@@ -40,53 +40,50 @@ const CreatorApplicationForm = ({ defaultValues, onSubmit }) => {
     <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col py-10 px-4">
       <AuthHeading title="Creator Application" />
 
-      <div className="mt-12 flex flex-col gap-5 items-center max-w-[365px] mx-auto w-full">
+      <div className="mt-20 smd:mt-28 flex flex-col gap-5 items-center max-w-[365px] mx-auto w-full">
+        <div className='flex flex-col gap-8 w-full'>
+          <TextField
+            {...register('firstName')}
+            placeholder="First Name"
+            hasError={!!errors.firstName}
+            helperText={errors.firstName?.message}
+            wrapperClassName="w-full"
+            className="rounded-sm border-neutral-light3 py-3 font-outfit placeholder:text-neutral-dark1"
+          />
+          <div className="flex flex-col gap-1.5 w-full">
+            <div className="relative">
 
-        <div className='flex flex-col gap-14 w-full'>
-          <div className='flex flex-col gap-8'>
-            <TextField
-              {...register('firstName')}
-              placeholder="First Name"
-              hasError={!!errors.firstName}
-              helperText={errors.firstName?.message}
-              wrapperClassName="w-full"
-              className="rounded-sm border-neutral-light3 py-3 font-nunito placeholder:text-neutral-dark2"
-            />
-            <div className="flex flex-col gap-1.5 w-full">
-              <div className="relative">
-                <div className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-primary-black">
-                  <InstagramIcon width={18} height={18} className="rounded-full bg-primary-black p-1 text-primary-white size-6" />
-                </div>
-                <span className='inline-block size-6 text-2xl font-baskervville absolute left-11 top-[23px] -translate-y-1/2 text-primary-black'>
+              <div className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-primary-black flex items-center gap-2">
+                <InstagramIcon width={18} height={18} className="rounded-full bg-primary-black p-1 text-primary-white size-6" />
+                <span className='inline-block text-xl mb-0.5 leading-5 font-baskervville text-primary-black'>
                   @
                 </span>
-                <input
-                  {...register('instagramUsername')}
-                  placeholder="Instagram Username"
-                  className={cn(
-                    'w-full! rounded-none! border py-3 pl-20 pr-3 text-2xl font-baskervville outline-none transition-colors',
-                    'border-neutral-light3 focus:border-black placeholder:text-neutral',
-                    errors.instagramUsername && 'border-error focus:border-error'
-                  )}
-                />
               </div>
-              {errors.instagramUsername?.message && (
-                <p className="text-xs font-nunito text-error">{errors.instagramUsername.message}</p>
-              )}
+              <input
+                {...register('instagramUsername')}
+                placeholder="Instagram Username"
+                className={cn(
+                  'w-full! rounded-none! border py-3 pl-16 pr-3 text-2xl font-baskervville outline-none transition-colors',
+                  'border-neutral-light3 focus:border-black placeholder:text-neutral-dark3 placeholder:tracking-[1px] placeholder:font-light',
+                  errors.instagramUsername && 'border-error focus:border-error'
+                )}
+              />
             </div>
+            {errors.instagramUsername?.message && (
+              <p className="text-xs font-nunito text-error">{errors.instagramUsername.message}</p>
+            )}
           </div>
         </div>
-
 
         <button
           type="submit"
           disabled={!isStepComplete}
-          className="w-full mt-17 rounded-sm bg-black py-3.5 smd:py-5.5 font-outfit text-sm smd:text-base uppercase tracking-[3px] text-white disabled:opacity-60"
+          className="w-full mt-10 rounded-sm bg-secondary-lightMintGreen py-3.5 smd:py-5.5 font-baskervville text-sm smd:text-base uppercase tracking-[3px] text-black disabled:opacity-60 border border-black"
         >
           Check Eligibility
         </button>
 
-        <p className="text-center font-raleway text-lg text-black">
+        <p className="text-center font-raleway text-lg text-black mt-5">
           Already a user?{' '}
           <Link to={ROUTE_PATHS.LOGIN} className="underline text-black font-semibold">
             Login

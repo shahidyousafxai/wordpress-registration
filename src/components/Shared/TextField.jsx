@@ -21,7 +21,7 @@ const TextField = ({
       <input
         id={inputId}
         className={cn(
-          'w-full rounded-none! border px-3 py-2.5 text-lg font-nunito outline-none transition-colors placeholder:font-outfit',
+          'w-full rounded-none! border px-3 py-2.5 text-lg font-outfit outline-none transition-colors placeholder:font-outfit',
           'border-neutral-light3 focus:border-black',
           hasError && 'border-error focus:border-error',
           className
